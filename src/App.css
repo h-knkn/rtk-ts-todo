@@ -1,11 +1,8 @@
 .App {
   text-align: center;
+  padding: 50px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,17 +10,63 @@
   }
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
 
 .App-link {
   color: rgb(112, 76, 182);
+}
+
+
+input[type="text"] {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    display: inline-block;
+    margin-right: 10px;
+    
+}
+input[type="text"]:focus {
+   box-shadow: 0 0 7px #444444;
+   border: 1px solid #444444;
+   outline: none;
+   border: none;
+}
+
+
+/* チェックボックス */
+
+.checkbox-input {
+    display: none;
+}
+.checkbox-label {
+    padding-left: 30px;
+    position: relative;
+    margin-right: 20px;
+}
+.checkbox-label::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #d7d2cd;
+    border-radius: 4px;
+}
+.checkbox-input:checked + .checkbox-label {
+    color: #999;
+}
+.checkbox-input:checked + .checkbox-label::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 7px;
+    height: 14px;
+    transform: rotate(40deg);
+    border-bottom: 3px solid #d01137;
+    border-right: 3px solid #d01137;
 }
 
 @keyframes App-logo-float {
