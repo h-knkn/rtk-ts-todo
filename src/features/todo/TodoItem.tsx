@@ -42,7 +42,7 @@ type Props = {
             <SButton onClick={handleEditClick}><AiOutlineEdit /></SButton>
             <SButton className="primary" onClick={()=> dispatch(deleteoTodo(todo))}><AiTwotoneDelete/></SButton>
             { isEditMode && 
-                ( <TodoEditInput  /> )
+                ( <TodoEditInput  handleCancelEditClick={()=> handleCancelEditClick}/> )
             }
     
         </Slist>

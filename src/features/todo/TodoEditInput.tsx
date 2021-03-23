@@ -5,7 +5,11 @@ import { RootState } from '../../app/store';
 import { addTodo, editTodo } from './todoSlice';
 
 
-const TodoEditInput:React.FC= (props) => {
+type Props = {
+  handleCancelEditClick: void;
+}
+
+const TodoEditInput:React.FC<Props> = (props) => {
 
     const dispatch = useDispatch();
 
@@ -30,7 +34,7 @@ const TodoEditInput:React.FC= (props) => {
         <SContainer>
             <input type="text" value={inputEditTitle} onChange={handleEditChange}/>
             <SButton onClick={hundleEditSubmit}>編集</SButton>
-            <SButton >キャンセル</SButton>
+            <SButton onClick={props.handleCancelEditClick()}>キャンセル</SButton>
         </SContainer>
     )
 }
