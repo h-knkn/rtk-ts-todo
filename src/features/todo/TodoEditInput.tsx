@@ -1,19 +1,23 @@
-import React , { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from "react";
 import styled from 'styled-components';
 import { useDispatch , useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { addTodo, editTodo } from './todoSlice';
+import { editTodo } from './todoSlice';
 
 
 type Props = {
-  handleCancelEditClick: void;
-}
+  handleCancelEditClick: () => void;
+  todoId: number;
+  todoTitle: string;
+};
 
-const TodoEditInput:React.FC<Props> = (props) => {
+const TodoEditInput:React.FC<Props> = memo((props) => {
 
     const dispatch = useDispatch();
 
-    const { todos } = useSelector((state: RootState) => state.todos);
+
+    const {todos} = useSelector((state: RootState) => state.todos);
+    console.log(todos);
 
     const[ inputEditTitle, setInputEditTitle ] = useState('');
 
@@ -26,18 +30,29 @@ const TodoEditInput:React.FC<Props> = (props) => {
         if(!inputEditTitle.trim()) {
             return
         }
-        dispatch(editTodo(inputEditTitle));
+        const data = {
+          id: props.todoId,
+          title: inputEditTitle,
+        }
+        dispatch(editTodo(data));
         setInputEditTitle("");
     }
+    
 
     return (
-        <SContainer>
-            <input type="text" value={inputEditTitle} onChange={handleEditChange}/>
-            <SButton onClick={hundleEditSubmit}>編集</SButton>
-            <SButton onClick={props.handleCancelEditClick()}>キャンセル</SButton>
-        </SContainer>
-    )
-}
+      <SContainer>
+        <input
+          type="text"
+          value={inputEditTitle}
+          onChange={handleEditChange}
+        />
+        <SButton onClick={hundleEditSubmit}>編集</SButton>
+        <SButton onClick={() => props.handleCancelEditClick()}>
+          キャンセル
+        </SButton>
+      </SContainer>
+    );
+});
 
 export default TodoEditInput
 

@@ -1,13 +1,10 @@
-import React , { useState, useCallback } from 'react';
+import React , { useState, useCallback , memo } from 'react';
 import styled from 'styled-components';
-import { useDispatch , useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
-import { addTodo, editTodo } from './todoSlice';
+import { useDispatch } from 'react-redux';
+import { addTodo } from './todoSlice';
 
-const TodoInput:React.FC  = () => {
+const TodoInput:React.FC  = memo(() => {
     const dispatch = useDispatch();
-
-    const { todos } = useSelector((state: RootState) => state.todos);
 
     const[ inputTitle, setInputTitle ] = useState('');
 
@@ -24,22 +21,13 @@ const TodoInput:React.FC  = () => {
         setInputTitle("");
     }
 
-    const hundleEditSubmit = () => {
-        // 空白の時の入力制御
-        if(!inputTitle.trim()) {
-            return
-        }
-        dispatch(editTodo(inputTitle));
-        setInputTitle("");
-    }
-
     return (
         <div>
             <input type="text" value={inputTitle} onChange={handleChange}/>
-            <SButton onClick={() => hundleAddSubmit}>追加</SButton>
+            <SButton onClick={hundleAddSubmit}>追加</SButton>
         </div>
     )
-}
+});
 
 export default TodoInput
 
